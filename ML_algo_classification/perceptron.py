@@ -1,4 +1,6 @@
 import numpy as np
+
+
 class Perceptron:
     '''Perceptron classifier
 
@@ -22,7 +24,8 @@ class Perceptron:
     errors_ : list
         Number of misclassifications (updates) in each epoch
     '''
-    def __init__(self, eta = 0.01, n_iter = 50, random_state = 1) -> None:
+
+    def __init__(self, eta=0.01, n_iter=50, random_state=1) -> None:
         self.eta = eta
         self.n_iter = n_iter
         self.random_state = random_state
@@ -41,15 +44,15 @@ class Perceptron:
         Returns
         _______
         self : object
-        
+
         '''
         # Initial weight vector contains small random numbers drawn from
         # normal distribution std 0.01
         rgen = np.random.RandomState(self.random_state)
-        self.w_ = rgen.normal( loc = 0.0, scale = 0.01, 
-                              size = X.shape[1])
+        self.w_ = rgen.normal(loc=0.0, scale=0.01,
+                              size=X.shape[1])
         self.b_ = np.float_(0.)
-        self.error_ = []
+        self.errors_ = []
 
         for _ in range(self.n_iter):
             errors = 0
@@ -68,3 +71,4 @@ class Perceptron:
     def predict(self, X):
         '''Return class label after unit step'''
         return np.where(self.net_input(X) >= 0.0, 1, 0)
+
